@@ -53,4 +53,40 @@ class JogadorTest {
         assertEquals(460, jogador.getX(), 0.001);
         assertEquals(340, jogador.getY(), 0.001);
     }
+
+    @Test 
+    void operacaoPermitida(){
+        Jogador jogador1 = new Jogador("Player 1");
+        Jogador jogador2 = new Jogador("Player 2");
+        Poder poder1 = new BolaDeFogo();
+
+        jogador1.usarPoder(poder1, jogador2);
+
+        assertEquals(2, poder1.getCarga());
+        assertEquals(85, jogador2.getVida());
+    }
+
+    @Test
+    void limiteOuRecusa(){
+        Jogador jogador = new Jogador("Player 1");
+        Poder poder1 = new BolaDeFogo();
+
+        jogador.usarPoder(poder1, jogador);
+        jogador.usarPoder(poder1, jogador);
+        jogador.usarPoder(poder1, jogador);
+
+        assertEquals(0, poder1.getCarga());
+    }
+
+    @Test
+    void doisObjetosIndependentes(){
+        Jogador jogador1 = new Jogador("Player 1");
+        Jogador jogador2 = new Jogador("Player 2");
+
+        Poder poder1 = new BolaDeFogo();
+        jogador1.usarPoder(poder1, jogador2);
+
+        assertEquals(85, jogador2.getVida());
+        assertEquals(100, jogador1.getVida());
+    }
 }
