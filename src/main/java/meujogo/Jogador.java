@@ -23,20 +23,20 @@ public class Jogador {
     public String getNome() { return nome; }
 
     public void receberDano(int qnt) {
-        if (qnt < 0) { vida -= qnt; }
+        vida -= qnt;
 
         if (vida < 0) { vida = 0; }
     }
 
     public void receberCura(int qnt) {
-        if (qnt > 0) { vida += qnt; }
+        vida += qnt;
 
         if (vida > 100) { vida = 100; }
     }
 
     public void usarPoder(Poder poder, Jogador alvo){
         poder.lancarPoder(alvo);
-        System.out.printf("O jogador %s lançou [%s] em %s", this.nome, poder.getNome(), alvo.getNome());
+        System.out.printf("O jogador %s usou [%s] em %s", this.nome, poder.getNome(), alvo.getNome());
     }
 
     public void mover(int horizontal, int vertical, double segundos) {

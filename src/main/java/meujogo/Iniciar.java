@@ -8,8 +8,9 @@ public class Iniciar {
         Jogador alvo1 = new Jogador("Judeu");
         Poder poder1 = new BolaDeFogo();
 
-        jogador1.usarPoder(poder1, alvo1);
+        alvo1.
 
+        
     
     }
 }
