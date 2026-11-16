@@ -45,6 +45,51 @@ class Teclado implements Entrada {
         return Gdx.input.isKeyJustPressed(Keys.R);
     }
 
+    @Override
+    public boolean jogador1Esquerda() {
+        return mantida(Keys.LEFT);
+    }
+
+    @Override
+    public boolean jogador1Direita() {
+        return mantida(Keys.RIGHT);
+    }
+
+    @Override
+    public boolean jogador1Cima() {
+        return mantida(Keys.UP);
+    }
+
+    @Override
+    public boolean jogador1Baixo() {
+        return mantida(Keys.DOWN);
+    }
+
+    @Override
+    public boolean jogador2Esquerda() {
+        return mantida(Keys.A);
+    }
+
+    @Override
+    public boolean jogador2Direita() {
+        return mantida(Keys.D);
+    }
+
+    @Override
+    public boolean jogador2Cima() {
+        return mantida(Keys.W);
+    }
+
+    @Override
+    public boolean jogador2Baixo() {
+        return mantida(Keys.S);
+    }
+
+    @Override
+    public boolean jogador2Confirmou() {
+        return Gdx.input.isKeyJustPressed(Keys.SPACE);
+    }
+
     private boolean mantida(int tecla) {
         return Gdx.input.isKeyPressed(tecla);
     }

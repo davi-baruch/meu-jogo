@@ -2,14 +2,20 @@ package meujogo;
 
 /** Estado e regra de movimento do exemplo inicial; não depende de janela ou teclado. */
 public class Jogador {
-    private double x = 460;
-    private double y = 340;
+    private double x;
+    private double y;
     private int vida = 100;
     private Poder poder;
     private String nome;
 
     public Jogador(String nome){
+        this(nome, 460, 340);
+    }
+
+    public Jogador(String nome, double x, double y) {
         this.nome = nome;
+        this.x = x;
+        this.y = y;
     }
 
     public double getX() { return x; }
