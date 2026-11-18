@@ -1,7 +1,8 @@
 package meujogo;
 
 public interface Poder {
-    boolean lancarPoder(Jogador alvo);
+    boolean prepararDisparo();
+    int getDano();
     int getCarga();
     String getNome();
 }

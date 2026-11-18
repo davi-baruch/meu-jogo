@@ -1,6 +1,8 @@
 package meujogo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class JogadorTest {
@@ -60,10 +62,10 @@ class JogadorTest {
         Jogador jogador2 = new Jogador("Player 2");
         Poder poder1 = new BolaDeFogo();
 
-        jogador1.usarPoder(poder1, jogador2);
+        assertTrue(jogador1.usarPoder(poder1));
 
         assertEquals(2, poder1.getCarga());
-        assertEquals(85, jogador2.getVida());
+        assertEquals(100, jogador2.getVida());
     }
 
     @Test
@@ -71,9 +73,10 @@ class JogadorTest {
         Jogador jogador = new Jogador("Player 1");
         Poder poder1 = new BolaDeFogo();
 
-        jogador.usarPoder(poder1, jogador);
-        jogador.usarPoder(poder1, jogador);
-        jogador.usarPoder(poder1, jogador);
+        assertTrue(jogador.usarPoder(poder1));
+        assertTrue(jogador.usarPoder(poder1));
+        assertTrue(jogador.usarPoder(poder1));
+        assertFalse(jogador.usarPoder(poder1));
 
         assertEquals(0, poder1.getCarga());
     }
@@ -84,9 +87,9 @@ class JogadorTest {
         Jogador jogador2 = new Jogador("Player 2");
 
         Poder poder1 = new BolaDeFogo();
-        jogador1.usarPoder(poder1, jogador2);
+        jogador1.usarPoder(poder1);
 
-        assertEquals(85, jogador2.getVida());
+        assertEquals(100, jogador2.getVida());
         assertEquals(100, jogador1.getVida());
     }
 }

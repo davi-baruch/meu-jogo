@@ -1,8 +1,9 @@
 # Meu jogo — Projeto 3 de POO
 
-Esta pasta é seu projeto de desenvolvimento. Ela já contém um jogo mínimo que
-abre uma janela, desenha um quadrado e permite movê-lo. Você vai evoluí-lo com
-os objetos e as regras do seu jogo ao longo dos laboratórios.
+Esta pasta é seu projeto de desenvolvimento. O jogo abre uma janela e coloca
+você para enfrentar um ninja: mova-se pelas setas, ataque com Enter e evite as
+shurikens. A bola de fogo tem alcance limitado e três cargas; o projétil fica
+visível durante o voo e só causa dano ao atingir o ninja.
 
 O Megamania está incluído como exemplo para consultar e executar. Os dois
 jogos usam a mesma engine.
@@ -16,8 +17,9 @@ jogos usam a mesma engine.
    extensões Java do VS Code. A pasta já recomenda as extensões necessárias.
 4. Na área **Executar e Depurar**, selecione **Meu jogo** e pressione **F5**.
 
-Você deve ver um quadrado ciano. Setas ou WASD movem; **R** reinicia;
-**Esc** fecha; **F11** alterna tela cheia.
+Você verá o jogador ciano e o ninja vermelho. As setas movem, **Enter** ataca
+quando o ninja está no alcance, **R** reinicia, **Esc** fecha e **F11** alterna
+a tela cheia.
 
 Não é necessário instalar Gradle, adicionar bibliotecas ou editar arquivos de
 configuração. A primeira importação precisa de internet para baixar as

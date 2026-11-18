@@ -1,7 +1,7 @@
 package meujogo;
 
 /** Estado e regra de movimento do exemplo inicial; não depende de janela ou teclado. */
-public class Jogador {
+public class Jogador implements Alvo {
     private double x;
     private double y;
     private int vida = 100;
@@ -18,20 +18,22 @@ public class Jogador {
         this.y = y;
     }
 
+    @Override
     public double getX() { return x; }
 
+    @Override
     public double getY() { return y; }
 
-    public int getTamanho() { return 40; }
+    @Override
+    public double getTamanho() { return 40; }
 
     public int getVida() { return vida; }
 
     public String getNome() { return nome; }
 
+    @Override
     public void receberDano(int qnt) {
-        vida -= qnt;
-
-        if (vida < 0) { vida = 0; }
+        vida = Math.max(0, vida - Math.max(0, qnt));
     }
 
     public void receberCura(int qnt) {
@@ -40,9 +42,8 @@ public class Jogador {
         if (vida > 100) { vida = 100; }
     }
 
-    public void usarPoder(Poder poder, Jogador alvo){
-        poder.lancarPoder(alvo);
-        System.out.printf("O jogador %s usou [%s] em %s", this.nome, poder.getNome(), alvo.getNome());
+    public boolean usarPoder(Poder poder){
+        return poder.prepararDisparo();
     }
 
     public void mover(int horizontal, int vertical, double segundos) {

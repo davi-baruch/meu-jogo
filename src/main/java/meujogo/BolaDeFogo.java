@@ -1,17 +1,20 @@
 package meujogo;
 
 public class BolaDeFogo implements Poder {
-    private int carga = 3;
+    private int carga = 10;
 
     @Override
-    public boolean lancarPoder(Jogador alvo) {
+    public boolean prepararDisparo() {
         if (carga <= 0) {
             return false;
         }
-        
         carga--;
-        alvo.receberDano(15);
         return true;
+    }
+
+    @Override
+    public int getDano() {
+        return 15;
     }
 
     @Override
