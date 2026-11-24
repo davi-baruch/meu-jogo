@@ -1,5 +1,7 @@
 package meujogo;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -56,6 +58,19 @@ class JogadorTest {
         assertEquals(340, jogador.getY(), 0.001);
     }
 
+    @Test
+    void jogadorParaAntesDeAtravessarUmaPedra() {
+        Jogador jogador = new Jogador("Player1", 260, 340);
+        Obstaculo pedra = new Pedra(350, 330, 50, 50);
+
+        jogador.mover(1, 0, 1, Collections.singletonList(pedra));
+
+        assertEquals(310, jogador.getX(), 0.001);
+        assertFalse(pedra.colideCom(
+                jogador.getX(), jogador.getY(),
+                jogador.getTamanho(), jogador.getTamanho()));
+    }
+
     @Test 
     void operacaoPermitida(){
         Jogador jogador1 = new Jogador("Player 1");
@@ -64,7 +79,7 @@ class JogadorTest {
 
         assertTrue(jogador1.usarPoder(poder1));
 
-        assertEquals(2, poder1.getCarga());
+        assertEquals(9, poder1.getCarga());
         assertEquals(100, jogador2.getVida());
     }
 

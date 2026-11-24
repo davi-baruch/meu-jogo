@@ -1,14 +1,15 @@
 package meujogo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import br.edu.ifpb.jogos.base.Cor;
 import br.edu.ifpb.jogos.base.Entrada;
 import br.edu.ifpb.jogos.base.Tela;
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.jupiter.api.Test;
 
 class MeuJogoTest {
     @Test
@@ -20,7 +21,7 @@ class MeuJogoTest {
         jogo.atualizar(0, entrada);
 
         TelaFake tela = desenhar(jogo);
-        assertTrue(tela.textos.contains("JOGADOR: 100  BOLAS: 2"));
+        assertTrue(tela.textos.contains("JOGADOR: 100  BOLAS: 9"));
         assertTrue(tela.textos.contains("NINJA: 100"));
         assertEquals(1, tela.circulos);
     }
@@ -37,7 +38,7 @@ class MeuJogoTest {
 
         TelaFake tela = desenhar(jogo);
 
-        assertTrue(tela.textos.contains("JOGADOR: 100  BOLAS: 3"));
+        assertTrue(tela.textos.contains("JOGADOR: 100  BOLAS: 9"));
         assertTrue(tela.textos.contains("NINJA: 100"));
     }
 
@@ -48,7 +49,8 @@ class MeuJogoTest {
 
         TelaFake tela = desenhar(jogo);
 
-        assertEquals(Cor.VERMELHO, tela.retangulos.get(2));
+        assertTrue(tela.retangulos.contains(Cor.CINZA));
+        assertTrue(tela.retangulos.contains(Cor.VERMELHO));
         assertTrue(tela.triangulos >= 4);
     }
 

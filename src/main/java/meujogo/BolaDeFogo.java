@@ -14,7 +14,7 @@ public class BolaDeFogo implements Poder {
 
     @Override
     public int getDano() {
-        return 15;
+        return 20;
     }
 
     @Override

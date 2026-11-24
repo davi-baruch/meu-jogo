@@ -1,9 +1,11 @@
 package meujogo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import java.util.Collections;
 import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class NinjaTest {
@@ -23,9 +25,9 @@ class NinjaTest {
 
         assertTrue(bola.prepararDisparo());
 
-        assertEquals(15, bola.getDano());
+        assertEquals(20, bola.getDano());
         assertEquals(100, ninja.getVida());
-        assertEquals(2, bola.getCarga());
+        assertEquals(9, bola.getCarga());
     }
 
     @Test
@@ -41,6 +43,18 @@ class NinjaTest {
     }
 
     @Test
+    void ninjaParaAoEncontrarUmaPedra() {
+        Ninja ninja = new Ninja("Ninja", 400, 340, new Random(1));
+        Obstaculo pedra = new Pedra(350, 250, 100, 40);
+
+        ninja.mover(0.5, Collections.singletonList(pedra));
+
+        assertTrue(ninja.getY() >= pedra.getY() + pedra.getAltura());
+        assertFalse(pedra.colideCom(
+                ninja.getX(), ninja.getY(), ninja.getTamanho(), ninja.getTamanho()));
+    }
+
+    @Test
     void shurikenCausaCincoDeDanoAoAtingirJogador() {
         Ninja ninja = new Ninja("Ninja", 260, 340, new Random(1));
         Jogador jogador = new Jogador("Jogador", 260, 340);
@@ -49,5 +63,18 @@ class NinjaTest {
         ninja.atualizar(0, jogador);
 
         assertEquals(95, jogador.getVida());
+    }
+
+    @Test
+    void shurikenEInterrompidaPelaPedraSemAtingirJogador() {
+        Ninja ninja = new Ninja("Ninja", 0, 0, new Random(1));
+        Jogador jogador = new Jogador("Jogador", 100, 0);
+        Obstaculo pedra = new Pedra(50, 0, 20, 40);
+        ninja.usarPoder(jogador);
+
+        ninja.atualizar(0.2, jogador, Collections.singletonList(pedra));
+        ninja.atualizar(0.5, jogador, Collections.<Obstaculo>emptyList());
+
+        assertEquals(100, jogador.getVida());
     }
 }

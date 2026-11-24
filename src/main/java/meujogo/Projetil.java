@@ -1,5 +1,8 @@
 package meujogo;
 
+import java.util.Collections;
+import java.util.List;
+
 import br.edu.ifpb.jogos.base.Cor;
 import br.edu.ifpb.jogos.base.Tela;
 
@@ -31,9 +34,24 @@ public class Projetil {
     }
 
     public boolean atualizar(double segundos, Alvo alvo) {
+        return atualizar(segundos, alvo, Collections.<Obstaculo>emptyList());
+    }
+
+    public boolean atualizar(double segundos, Alvo alvo,
+                             List<? extends Obstaculo> obstaculos) {
         double tempo = Math.max(0, segundos);
-        x += direcaoX * VELOCIDADE * tempo;
-        y += direcaoY * VELOCIDADE * tempo;
+        double proximoX = x + direcaoX * VELOCIDADE * tempo;
+        double proximoY = y + direcaoY * VELOCIDADE * tempo;
+
+        for (Obstaculo obstaculo : obstaculos) {
+            if (Colisao.segmentoAtingeObstaculo(
+                    x, y, proximoX, proximoY, RAIO, obstaculo)) {
+                return true;
+            }
+        }
+
+        x = proximoX;
+        y = proximoY;
 
         if (colidiu(alvo)) {
             alvo.receberDano(poder.getDano());
@@ -49,6 +67,8 @@ public class Projetil {
                 && y + RAIO >= alvo.getY()
                 && y - RAIO <= alvo.getY() + alvo.getTamanho();
     }
+
+    
 
     public void desenhar(Tela tela) {
         tela.circulo(x, y, RAIO, Cor.LARANJA);

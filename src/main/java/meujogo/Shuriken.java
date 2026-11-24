@@ -1,5 +1,8 @@
 package meujogo;
 
+import java.util.Collections;
+import java.util.List;
+
 import br.edu.ifpb.jogos.base.Cor;
 import br.edu.ifpb.jogos.base.Tela;
 
@@ -25,9 +28,24 @@ public class Shuriken {
     }
 
     public void mover(double segundos) {
+        mover(segundos, Collections.<Obstaculo>emptyList());
+    }
+
+    public boolean mover(double segundos, List<? extends Obstaculo> obstaculos) {
         double tempo = Math.max(0, segundos);
-        x += direcaoX * VELOCIDADE * tempo;
-        y += direcaoY * VELOCIDADE * tempo;
+        double proximoX = x + direcaoX * VELOCIDADE * tempo;
+        double proximoY = y + direcaoY * VELOCIDADE * tempo;
+
+        for (Obstaculo obstaculo : obstaculos) {
+            if (Colisao.segmentoAtingeObstaculo(
+                    x, y, proximoX, proximoY, RAIO_COLISAO, obstaculo)) {
+                return true;
+            }
+        }
+
+        x = proximoX;
+        y = proximoY;
+        return false;
     }
 
     public boolean colidiu(Jogador jogador) {
